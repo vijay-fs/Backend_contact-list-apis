@@ -1,8 +1,10 @@
 // pages/api/add-contact.js
 import fs from "fs";
 import contactsData from "../../contacts.json";
-
+import applyCors from "../../middleware/cors";
 export default function handler(req, res) {
+  applyCors(req, res);
+
   if (req.method === "POST") {
     const newContact = req.body;
 
