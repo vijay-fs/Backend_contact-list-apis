@@ -10,6 +10,24 @@ function Home() {
       .then((data) => setContacts(data));
   }, []);
 
+  const addContact = async () => {
+    const response = await fetch("/api/add-contact", {
+      method: "POST",
+      body: JSON.stringify({
+        name: "New Contact",
+        phone: "123-456-7890",
+        email: "",
+        profilePicture: "",
+      }),
+      headers: {
+        "Content-Type": "application/json",
+      },
+    });
+
+    const newContact = await response.json();
+    setContacts([...contacts, newContact]);
+  };
+
   return (
     <>
       <div className="p-4">
@@ -33,6 +51,7 @@ function Home() {
             </li>
           ))}
         </ul>
+        <button onClick={addContact}>Add Contact</button>
       </div>
     </>
   );
