@@ -5,38 +5,31 @@ function Home() {
   const [contacts, setContacts] = useState([]);
 
   useEffect(() => {
-    fetch("/api/contacts")
-      .then((response) => response.json())
-      .then((data) => setContacts(data));
+    fetchContacts();
   }, []);
 
-  // const addContact = async () => {
-  //   const response = await fetch("/api/add-contact", {
-  //     method: "POST",
-  //     body: JSON.stringify({
-  //       name: "New Contact",
-  //       phone: "123-456-7890",
-  //       email: "",
-  //       profilePicture: "",
-  //     }),
-  //     headers: {
-  //       "Content-Type": "application/json",
-  //     },
-  //   });
-
-  //   const newContact = await response.json();
-  //   setContacts([...contacts, newContact]);
-  // };
+  const fetchContacts = async () => {
+    try {
+      const response = await fetch("/api/contacts");
+      if (!response.ok) {
+        throw new Error("Failed to fetch contacts");
+      }
+      const data = await response.json();
+      setContacts(data);
+    } catch (error) {
+      console.error("Error fetching contacts:", error);
+    }
+  };
 
   return (
     <>
       <div className="p-4">
-        <h1 className="text-3xl font-bold underline mb-4">Contact List</h1>
+        <h1 className="text-3xl font-bold mb-4">Contact List</h1>
 
         <ul className="grid grid-cols-1 gap-4 md:grid-cols-2 lg:grid-cols-3">
           {contacts.map((contact) => (
             <li
-              key={contact.id}
+              key={contact._id} // Use `_id` as the unique key
               className="border rounded-lg p-4 shadow-md hover:shadow-lg transition duration-300"
             >
               <img
