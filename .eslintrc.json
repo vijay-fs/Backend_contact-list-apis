@@ -1,3 +1,11 @@
 {
-  "extends": "next/core-web-vitals"
+  "extends": "next/core-web-vitals",
+  "parser": "@babel/eslint-parser", // Specify the ESLint parser
+  "parserOptions": {
+    "ecmaVersion": 2021, // Or the version of ECMAScript you are using
+    "sourceType": "module", // Specify "module" if you are using ES modules
+    "ecmaFeatures": {
+      "jsx": true // Enable JSX parsing
+    }
+  }
 }
