@@ -1,7 +1,3 @@
-// pages/api/add-contact.js
-import fs from "fs";
-
-import contactsData from "../../contacts.json";
 import applyCors from "../../middleware/cors";
 import connectDB from "../../db";
 import Contact from "../../models/Contact";
